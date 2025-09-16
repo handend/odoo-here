@@ -1,0 +1,68 @@
+<odoo>
+    <!-- FORM VIEW -->
+    <record id="view_candidate_survey_form" model="ir.ui.view">
+        <field name="name">candidate.survey.form</field>
+        <field name="model">candidate.survey</field>
+        <field name="arch" type="xml">
+            <form string="Candidate Survey">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="email"/>
+                        <field name="question1"/>
+                        <field name="question2"/>
+                        <field name="eligible" readonly="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_go_to_appointment"
+                                type="object"
+                                string="Book Appointment"
+                                class="oe_highlight"
+                                invisible="eligible == False"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE VIEW -->
+    <record id="view_candidate_survey_tree" model="ir.ui.view">
+        <field name="name">candidate.survey.tree</field>
+        <field name="model">candidate.survey</field>
+        <field name="arch" type="xml">
+            <tree string="Candidate Survey">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="eligible"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id="action_candidate_survey" model="ir.actions.act_window">
+        <field name="name">Candidate Surveys</field>
+        <field name="res_model">candidate.survey</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Candidate Survey
+            </p>
+        </field>
+    </record>
+
+    <!-- MENUS -->
+    <menuitem id="menu_candidate_root"
+              name="Candidate Surveys"
+              sequence="10"/>
+
+    <menuitem id="menu_candidate_main"
+              name="Surveys"
+              parent="menu_candidate_root"
+              sequence="20"/>
+
+    <menuitem id="menu_candidate_survey"
+              name="All Surveys"
+              parent="menu_candidate_main"
+              action="action_candidate_survey"
+              sequence="30"/>
+</odoo>
